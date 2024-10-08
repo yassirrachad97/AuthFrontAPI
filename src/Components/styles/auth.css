@@ -48,7 +48,7 @@ form .input-box {
     border-radius: 40px;
     font-size: 16px;
     color: #fff;
-    padding: 20px 45px 20px 20px;
+    padding: 20px 45px 20px 20px; 
 }
 
 .input-box input::placeholder {
@@ -62,7 +62,27 @@ form .input-box {
     translate:  0 -50%;
     font-size: 16px;
 }
+.input-box input.error {
+    border-color: red;  
+}
 
+.error-message {
+    color: red; 
+    font-size: 12px; 
+    margin-top: -10px;
+    opacity: 0;               
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    left: 20px;
+    transform: translateY(-50%);
+    top: 50%;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.error-message.visible {
+    opacity: 1;             
+    transform: translateY(-50%);
+}
 form .remember-forgot {
     display: flex;
     justify-content: space-between;
