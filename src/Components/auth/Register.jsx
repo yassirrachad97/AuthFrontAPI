@@ -83,7 +83,7 @@ const Register = () => {
                     toast.error(error.response.data.message || 'Une erreur s\'est produite.');
                 } else {
                    
-                    toast.error('Erreur de connexion au serveur.');
+                    toast.error('Erreur de connexion au serveur .');
                 }
               
             }
