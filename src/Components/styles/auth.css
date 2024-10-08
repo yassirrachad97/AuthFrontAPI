@@ -80,6 +80,7 @@ form .input-box {
     pointer-events: none;
 }
 .error-message.visible {
+
     opacity: 1;             
     transform: translateY(-50%);
 }
@@ -130,4 +131,40 @@ form .register-link {
 
 .register-link p a:hover{
     text-decoration: underline;
+}
+
+
+.otp-inputs {
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
+}
+
+.otp-input {
+    width: 40px;
+    height: 40px; 
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid #ccc; 
+    border-radius: 5px;
+    outline: none; 
+    transition: border-color 0.2s; 
+}
+
+.otp-input:focus {
+    border-color: #007bff;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color:#333;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
 }
