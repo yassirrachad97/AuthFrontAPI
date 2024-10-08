@@ -6,6 +6,7 @@ const Form = ({ onSubmit, inputs, title, children }) => {
     return (
         <form onSubmit={onSubmit}>
              <h1>{title}</h1>
+             
             {inputs.map((input, index) => (
                 <InputField
                     key={index}
@@ -14,6 +15,7 @@ const Form = ({ onSubmit, inputs, title, children }) => {
                     value={input.value}
                     onChange={input.onChange}
                     icon={input.icon}
+                    errorMessage={input.errorMessage}
                 />
             ))}
             {children} 
