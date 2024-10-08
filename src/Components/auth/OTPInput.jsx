@@ -38,7 +38,7 @@ const OTPInput = ({ email, onSubmit }) => {
             if (error.response && error.response.data) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Une erreur est survenue, veuillez réessayer plus tard.');
+                toast.error('Une erreur est survenuee, veuillez réessayer plus tard.');
             }
         }
     };
