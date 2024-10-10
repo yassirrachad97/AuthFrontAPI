@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdEmail } from 'react-icons/md';
 import { FaLock } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { validateEmail, validatePassword } from './Validation';
 import OTPInput from './OTPInput';
 import Form from './Form';
@@ -17,7 +17,15 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const [showOTP, setShowOTP] = useState(false); 
     const navigate = useNavigate();
-    
+    const location = useLocation();
+
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        if (searchParams.get('verified') === 'success') {
+            toast.success('Votre email a été vérifié avec succès ! Veuillez vous connecter.'); // Afficher le message de succès
+        }
+    }, [location.search]);
     const handleBlur = (type) => {
 
         if (type === 'email') {
@@ -67,9 +75,9 @@ const Login = () => {
                 if (data.message === 'OTP sent to your email. Please verify to proceed.') {
                     
                     setShowOTP(true);
-                } else {
+                }  else {
                   
-                    navigate('/dashboard');
+                    navigate('/home');  
                 }
             } catch (error) {
                
@@ -83,7 +91,7 @@ const Login = () => {
     };
 
     const handleOTPSubmit = () => {
-        navigate('/dashboard');
+        navigate('/home');
     };
     const inputs = [
         {

@@ -6,6 +6,8 @@ import Login from './Components/auth/login';
 import Register from './Components/auth/Register';
 import RequestPasswordReset from './Components/auth/RequestPasswordReset'; 
 import ResetPassword from './Components/auth/ResetPassword';
+import Home from './components/auth/Home';
+import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
 
@@ -16,6 +18,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<RequestPasswordReset />} />
         <Route path="reset-password/:token" element={<ResetPassword />} />
+        <Route 
+          path="/home" 
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
