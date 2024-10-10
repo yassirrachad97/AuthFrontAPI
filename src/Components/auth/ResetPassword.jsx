@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FaLock } from 'react-icons/fa';
 
+
 const ResetPassword = () => {
     const { token } = useParams(); 
     const [newPassword, setNewPassword] = useState('');
@@ -23,12 +24,13 @@ const ResetPassword = () => {
         }
 
         try {
-            await axios.post('http://localhost:3000/api/auth/reset-password-with-otp', {
+            await axios.post('http://localhost:3000/api/auth/reset-password', {
                 token,
                 newPassword,
             });
+           
             toast.success('Mot de passe réinitialisé avec succès.');
-            navigate('/dashboard'); 
+            navigate('/login'); 
         }catch (error) {
             if (error.response) {
                 const status = error.response.status;
