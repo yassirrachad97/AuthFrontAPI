@@ -16,16 +16,21 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const [showOTP, setShowOTP] = useState(false); 
+    const [token, setToken] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
 
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-        if (searchParams.get('verified') === 'success') {
-            toast.success('Votre email a été vérifié avec succès ! Veuillez vous connecter.'); // Afficher le message de succès
+        const verificationStatus = searchParams.get('verified');
+        if (verificationStatus === 'success') {
+            toast.success('Votre email a été vérifié avec succès. Veuillez vous connecter.');
+        } else if (verificationStatus === 'expired') {
+            toast.warning('Le lien de vérification a expiré. Un nouveau lien a été envoyé à votre adresse email.');
         }
     }, [location.search]);
+    
     const handleBlur = (type) => {
 
         if (type === 'email') {
@@ -75,6 +80,7 @@ const Login = () => {
                 if (data.message === 'OTP sent to your email. Please verify to proceed.') {
                     
                     setShowOTP(true);
+                    setToken(data.token);
                 }  else {
                   
                     navigate('/home');  
@@ -90,8 +96,27 @@ const Login = () => {
         }
     };
 
-    const handleOTPSubmit = () => {
-        navigate('/home');
+    const handleOTPSubmit = async (otp) => {
+        try {
+            const response = await axios.post('http://localhost:3000/api/auth/verify-otp', {
+                email,
+                otp,
+            });
+
+            const data = response.data;
+            if (data.token) {
+                // Save token and navigate
+                localStorage.setItem('token', data.token);
+                toast.success('OTP vérifié avec succès');
+                navigate('/home');
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error('Une erreur est survenue, veuillez réessayer plus tard.');
+            }
+        }
     };
     const inputs = [
         {
