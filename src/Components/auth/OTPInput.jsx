@@ -31,12 +31,20 @@ const OTPInput = ({ email, onSubmit }) => {
                 email,
                 otp: otpCode,
             });
+            const { token } = response.data;
+            localStorage.setItem('token', token); 
 
             toast.success('Login successful');
             onSubmit(); 
-        } catch (error) {
+        }  catch (error) {
             if (error.response && error.response.data) {
-                toast.error(error.response.data.message);
+                if (error.response.data.message === 'OTP has expired') {
+
+                    await axios.post('http://localhost:3000/api/auth/resend-otp', { email });
+                    toast.error('Votre OTP a expiré. Un nouveau OTP vous a été envoyé.');
+                } else {
+                    toast.error(error.response.data.message);
+                }
             } else {
                 toast.error('Une erreur est survenue, veuillez réessayer plus tard.');
             }
@@ -54,7 +62,7 @@ const OTPInput = ({ email, onSubmit }) => {
                         value={digit}
                         onChange={(e) => handleChange(e.target.value, index)}
                         onKeyUp={(e) => handleKeyUp(e, index)}
-                        className="otp-input" // Appliquer la classe CSS pour le style
+                        className="otp-input" 
                     />
                 ))}
             </div>
