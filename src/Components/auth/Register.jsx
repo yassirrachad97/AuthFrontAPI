@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { MdEmail } from "react-icons/md";
 import { FaLock, FaUser, FaPhone } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateUsername, validatePhoneNumber, validateEmail, validatePassword } from './Validation';
 import Form from './Form';
 import '../styles/auth.css'; 
 import { toast } from 'react-toastify';
 
+
 const Register = () => {
 
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhone] = useState('');
-    
+   
     
 
     const [usernameError, setUsernameError] = useState('');
@@ -67,12 +69,13 @@ const Register = () => {
                 });
 
                
-
+                navigate('/login');
                 toast.success(response.data.message || 'Inscription réussie!');
                 setUsername('');
                 setEmail('');
                 setPassword('');
                 setPhone('');
+
        
             } catch (error) {
                 if (error.response && error.response.data) {
@@ -80,7 +83,7 @@ const Register = () => {
                     toast.error(error.response.data.message || 'Une erreur s\'est produite.');
                 } else {
                    
-                    toast.error('Erreur de connexion au serveur.');
+                    toast.error('Erreur de connexion au serveur .');
                 }
               
             }
