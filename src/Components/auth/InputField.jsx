@@ -1,5 +1,4 @@
-
-
+import React from 'react';
 const InputField = ({ type, placeholder, value, onChange, icon, errorMessage }) => {
     const isError = Boolean(errorMessage);
     return (
