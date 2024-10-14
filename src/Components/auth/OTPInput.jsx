@@ -62,7 +62,7 @@ const OTPInput = ({ email, onSubmit }) => {
                         value={digit}
                         onChange={(e) => handleChange(e.target.value, index)}
                         onKeyUp={(e) => handleKeyUp(e, index)}
-                        className="otp-input" // Appliquer la classe CSS pour le style
+                        className="otp-input" 
                     />
                 ))}
             </div>
