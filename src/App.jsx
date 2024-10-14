@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Components/auth/login';
+import Login from './Components/auth/Login';
 import Register from './Components/auth/Register';
 import RequestPasswordReset from './Components/auth/RequestPasswordReset'; 
 import ResetPassword from './Components/auth/ResetPassword';
